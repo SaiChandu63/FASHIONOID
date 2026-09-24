@@ -1,0 +1,6 @@
+import {Router} from 'express'; import {db} from '../db.js'; import {hashPassword,checkPassword,signUser,auth} from '../auth.js';
+const r=Router();
+r.post('/register',(req,res)=>{const {name,email,password}=req.body||{}; if(!name||!email||!password||password.length<6)return res.status(400).json({error:'Name, valid email and 6+ character password required'}); try{const info=db.prepare('INSERT INTO users(name,email,password_hash) VALUES(?,?,?)').run(name,email.toLowerCase(),hashPassword(password)); const u=db.prepare('SELECT id,name,email,role FROM users WHERE id=?').get(info.lastInsertRowid); res.status(201).json({user:u,token:signUser(u)});}catch(e){res.status(409).json({error:'Email already registered'});}});
+r.post('/login',(req,res)=>{const {email,password}=req.body||{}; const u=db.prepare('SELECT * FROM users WHERE email=?').get((email||'').toLowerCase()); if(!u||!checkPassword(password||'',u.password_hash))return res.status(401).json({error:'Invalid email or password'}); const safe={id:u.id,name:u.name,email:u.email,role:u.role}; res.json({user:safe,token:signUser(safe)});});
+r.get('/me',auth,(req,res)=>res.json({user:db.prepare('SELECT id,name,email,role,created_at FROM users WHERE id=?').get(req.user.id)}));
+export default r;
