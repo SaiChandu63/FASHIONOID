@@ -4,6 +4,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import {db} from './db.js';
+import './seed.js';
 import auth from './routes/auth.js';
 import products from './routes/products.js';
 import orders from './routes/orders.js';
