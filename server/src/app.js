@@ -13,10 +13,11 @@ import payments from './routes/payments.js';
 
 const app=express();
 const origins=(process.env.FRONTEND_ORIGIN||'').split(',').map(s=>s.trim()).filter(Boolean);
+const allowedOrigin=(origin)=>!origin||origins.length===0||origins.includes(origin)||/^https:\/\/fashionoid\.[a-z0-9-]+\.workers\.dev$/.test(origin);
 app.disable('x-powered-by');
 app.set('trust proxy',1);
 app.use(helmet({crossOriginResourcePolicy:{policy:'cross-origin'}}));
-app.use(cors({origin:(origin,cb)=>{if(!origin||origins.length===0||origins.includes(origin)) return cb(null,true); cb(new Error('CORS origin not allowed'));},credentials:true}));
+app.use(cors({origin:(origin,cb)=>{if(allowedOrigin(origin)) return cb(null,true); cb(new Error('CORS origin not allowed'));},credentials:true}));
 app.use(express.json({limit:'1mb'}));
 app.use(rateLimit({windowMs:15*60*1000,max:300,standardHeaders:'draft-8',legacyHeaders:false}));
 app.get('/api/health',(req,res)=>res.json({ok:true,brand:'FASHIONOID',status:'production-ready',time:new Date().toISOString()}));
