@@ -1,2 +1,1 @@
-window.FASHIONOID_API_URL = '';
-// After the Render backend is deployed, set this to: https://YOUR-API.onrender.com/api
+window.FASHIONOID_API_URL = 'https://fashionoid.onrender.com/api';
