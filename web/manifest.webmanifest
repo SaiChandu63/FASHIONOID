@@ -1,0 +1,10 @@
+{
+  "name": "FASHIONOID — Your Style. Your Identity.",
+  "short_name": "FASHIONOID",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#070707",
+  "theme_color": "#070707",
+  "description": "FASHIONOID fashion and lifestyle store.",
+  "icons": [{"src":"assets/fashionoid-logo.png","sizes":"512x512","type":"image/png","purpose":"any"}]
+}
