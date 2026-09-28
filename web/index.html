@@ -125,6 +125,20 @@
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
 <script src="config.js"></script>
+<script>
+  // FASHIONOID: guarantee Firebase is initialized after the compat SDKs load.
+  (function(){
+    try {
+      if (window.firebase && window.FASHIONOID_FIREBASE_CONFIG && window.FASHIONOID_FIREBASE_CONFIG.apiKey &&
+          window.FASHIONOID_FIREBASE_CONFIG.apiKey !== 'YOUR_FIREBASE_API_KEY' &&
+          (!firebase.apps || !firebase.apps.length)) {
+        firebase.initializeApp(window.FASHIONOID_FIREBASE_CONFIG);
+      }
+    } catch (e) {
+      console.error('FASHIONOID Firebase initialization failed:', e);
+    }
+  })();
+</script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script></head>
 <body>
 <div class="announcement">Free shipping on orders above ₹999 <span>•</span> Easy 7-day returns</div>
