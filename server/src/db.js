@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS orders(id INTEGER PRIMARY KEY AUTOINCREMENT,order_num
 CREATE TABLE IF NOT EXISTS order_items(id INTEGER PRIMARY KEY AUTOINCREMENT,order_id INTEGER NOT NULL,product_id INTEGER NOT NULL,name TEXT NOT NULL,sku TEXT NOT NULL,quantity INTEGER NOT NULL,price INTEGER NOT NULL,size TEXT,color TEXT,image TEXT,FOREIGN KEY(order_id) REFERENCES orders(id),FOREIGN KEY(product_id) REFERENCES products(id));
 CREATE TABLE IF NOT EXISTS order_events(id INTEGER PRIMARY KEY AUTOINCREMENT,order_id INTEGER NOT NULL,status TEXT NOT NULL,note TEXT DEFAULT '',created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(order_id) REFERENCES orders(id));
 `);
-try{db.exec("ALTER TABLE users ADD COLUMN firebase_uid TEXT UNIQUE")}catch{}
+try{db.exec("ALTER TABLE users ADD COLUMN firebase_uid TEXT")}catch{}
+try{db.exec("CREATE UNIQUE INDEX IF NOT EXISTS idx_users_firebase_uid ON users(firebase_uid)")}catch{}
 try{db.exec("ALTER TABLE users ADD COLUMN phone TEXT")}catch{}
 try{db.exec("ALTER TABLE users ADD COLUMN phone_verified INTEGER NOT NULL DEFAULT 0")}catch{}
 
