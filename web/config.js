@@ -10,6 +10,4 @@ window.FASHIONOID_FIREBASE_CONFIG = {
 };
 if(window.firebase && window.FASHIONOID_FIREBASE_CONFIG.apiKey !== 'YOUR_FIREBASE_API_KEY'){
   firebase.initializeApp(window.FASHIONOID_FIREBASE_CONFIG);
-  firebase.auth().onAuthStateChanged(()=>{});
-  window.addEventListener('load',handleFirebaseRedirect);
 }
