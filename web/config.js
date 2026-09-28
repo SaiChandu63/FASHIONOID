@@ -1,13 +1,13 @@
 window.FASHIONOID_API_URL = 'https://fashionoid.onrender.com/api';
-/* Add these public Firebase Web App values after creating the FASHIONOID Firebase project. */
+/* FASHIONOID Firebase Web App configuration */
 window.FASHIONOID_FIREBASE_CONFIG = {
-  apiKey: 'YOUR_FIREBASE_API_KEY',
-  authDomain: 'YOUR_FIREBASE_PROJECT.firebaseapp.com',
-  projectId: 'YOUR_FIREBASE_PROJECT_ID',
-  storageBucket: 'YOUR_FIREBASE_PROJECT.firebasestorage.app',
-  messagingSenderId: 'YOUR_FIREBASE_MESSAGING_SENDER_ID',
-  appId: 'YOUR_FIREBASE_APP_ID'
+  apiKey: 'AIzaSyBFe0NK-NRURSBsM4gYLvJpyi8rljnm-YY',
+  authDomain: 'fashionoid-b4888.firebaseapp.com',
+  projectId: 'fashionoid-b4888',
+  storageBucket: 'fashionoid-b4888.firebasestorage.app',
+  messagingSenderId: '624525081312',
+  appId: '1:624525081312:web:5b5261a9bbc6cae6e06e85'
 };
-if(window.firebase && window.FASHIONOID_FIREBASE_CONFIG.apiKey !== 'YOUR_FIREBASE_API_KEY'){
+if(window.firebase && !firebase.apps.length){
   firebase.initializeApp(window.FASHIONOID_FIREBASE_CONFIG);
 }
